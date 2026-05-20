@@ -1,3 +1,10 @@
+## Live Demo
+
+https://academic-dashboard-budget.streamlit.app/
+
+
+
+
 # Academic Budget Forecasting Dashboard
 
 Interactive financial planning dashboard for a simulated academic unit operating budget of approximately **$3.8M**. The project generates synthetic monthly expense data, analyzes budget variance, forecasts year-end spending, and provides scenario simulation through a Streamlit dashboard.
