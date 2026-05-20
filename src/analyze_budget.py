@@ -1,8 +1,9 @@
 import pandas as pd
-# Load data
-budget = pd.read_csv("budget_simulator/data/department_budget.csv")
-expenses = pd.read_csv("budget_simulator/data/monthly_expenses.csv")
+import matplotlib.pyplot as plt
 
+# Load data
+budget = pd.read_csv("data/raw/department_budget.csv")
+expenses = pd.read_csv("data/raw/monthly_expenses.csv")
 # Total spent per category (sum of 12 months)
 total_spent = expenses.groupby("Category")["Amount_Spent"].sum().reset_index()
 
@@ -62,3 +63,52 @@ for _, row in analysis.iterrows():
         print(f"{row['Category']}: Projected to exceed budget by ${row['Forecast_Variance']:.2f}. Review spending controls.")
     else:
         print(f"{row['Category']}: On track. Projected underspend of ${abs(row['Forecast_Variance']):.2f}.")
+
+
+###################
+
+
+###################
+
+# Plot Budget vs Forecast
+
+plt.figure(figsize=(8,5))
+
+x = range(len(analysis["Category"]))
+width = 0.4
+
+plt.bar(
+    [i - width/2 for i in x],
+    analysis["Annual_Budget"],
+    width=width,
+    label="Budget"
+)
+
+plt.bar(
+    [i + width/2 for i in x],
+    analysis["Forecast_Annual_Spend"],
+    width=width,
+    label="Forecast"
+)
+
+plt.xticks(x, analysis["Category"], rotation=45)
+
+plt.xlabel("Category")
+plt.ylabel("Amount ($)")
+plt.title("Budget vs Forecast by Category")
+
+plt.legend()
+plt.tight_layout()
+
+# Save chart
+plt.savefig("outputs/charts/budget_vs_forecast.png")
+
+plt.show()
+
+print("\nSaved chart to outputs/charts/budget_vs_forecast.png")
+
+
+# Save processed analysis
+analysis.to_csv("data/processed/budget_analysis.csv", index=False)
+
+print("\nCool cool saved analysis to data/processed/budget_analysis.csv")
