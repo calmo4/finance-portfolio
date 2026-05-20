@@ -1,35 +1,77 @@
-# Academic Unit Budget Simulation & Forecasting (CDSS)
+# Academic Budget Forecasting Dashboard
 
-Simulated end-to-end financial planning workflow for a mid-size university unit (~$3–4M annual operating budget). The project generates realistic monthly expenditures using mixed probability distributions, then produces budget vs. actual variance reporting and a year-end forecast with executive-style narrative output.
+Interactive financial planning dashboard for a simulated academic unit operating budget of approximately **$3.8M**. The project generates synthetic monthly expense data, analyzes budget variance, forecasts year-end spending, and provides scenario simulation through a Streamlit dashboard.
 
 ## Why this project
-This mirrors higher education finance workflows: budgeting, expenditure monitoring, burn-rate forecasting, and communicating results clearly for decision-making.
 
-## What it does
-1. **Generates data (simulated)**
-   - Creates a budget by category with built-in buffers for volatility
-   - Generates monthly “actuals” using mixed distributions:
-     - **Payroll:** Normal (stable)
-     - **Travel:** Lognormal (right-skew; occasional spikes)
-     - **Equipment:** Gamma (lumpy purchases)
-     - **Operations:** Normal (moderately stable)
+This project mirrors real finance and operations workflows: budget tracking, burn-rate forecasting, scenario planning, and executive reporting. It is designed to show how data can support financial decision-making for departments, nonprofits, or academic units.
 
-2. **Analyzes and reports**
-   - Budget vs. Actual variance by category
-   - Remaining budget and overspend flags
-   - Forecast annual spend from average monthly burn rate
-   - Prints an executive summary for finance leadership
+## Features
 
-## Files
-- `generate_data.py` — creates:
-  - `data/department_budget.csv`
-  - `data/monthly_expenses.csv`
-- `analyze_budget.py` — creates:
-  - `data/budget_analysis_report.csv` (plus printed tables + executive summary)
+- Generates simulated monthly expense data across Payroll, Travel, Equipment, and Operations
+- Models realistic spending patterns using normal, lognormal, and gamma distributions
+- Calculates budget vs. actual variance by category
+- Forecasts year-end spending based on monthly burn rate
+- Provides interactive category filtering
+- Includes scenario sliders for adjusted spending assumptions
+- Displays KPI cards, dynamic charts, and executive-style summaries
 
-## How to run
-From the project root (`finance_portfolio`):
+## Project Structure
 
-```bash
-python3 budget_simulator/generate_data.py
-python3 budget_simulator/analyze_budget.py
+```text
+budget_forecasting_dashboard/
+├── app/
+│   └── dashboard.py
+├── data/
+│   ├── raw/
+│   │   ├── department_budget.csv
+│   │   └── monthly_expenses.csv
+│   └── processed/
+│       └── budget_analysis.csv
+├── outputs/
+│   └── charts/
+│       └── budget_vs_forecast.png
+├── src/
+│   ├── generate_data.py
+│   └── analyze_budget.py
+├── README.md
+└── requirements.txt
+
+
+****How to run****
+
+Install dependencies:
+
+pip3 install -r requirements.txt
+
+Generate the simulated data:
+
+python3 src/generate_data.py
+
+Run the budget analysis pipeline:
+
+python3 src/analyze_budget.py
+
+Launch the dashboard:
+
+python3 -m streamlit run app/dashboard.py
+Tech Stack
+Python
+pandas
+matplotlib
+Plotly
+Streamlit
+Dashboard Overview
+
+This dashboard includes:
+
+Total budget, amount spent, adjusted forecast, and projected remaining budget
+Budget vs. adjusted forecast comparison
+Scenario simulation sliders for category-level spending changes
+Monthly spending trends
+Executive summaries showing projected underspend or overspend
+Detailed analysis table
+
+Key Takeaways
+
+This project demonstrates an end-to-end analytics workflow: data generation, processing, forecasting, visualization, and interactive dashboard!!!!!
